@@ -40,6 +40,7 @@ Events CSV:
   - only existing users will be associated with the event
   - Even if we import the users we don't have emails so there is no way to connect to users or send them email for password reset
 
--
+### Notes:
+![notes](notes-1.jpeg)
 
-
+![notes](notes-2.jpeg)
