@@ -1,6 +1,11 @@
-%p#notice= notice
-%h1 Events
-%table
+%h1.text-center Events
+= form_tag events_path, method: :get do
+  = label_tag 'From:'
+  = date_field_tag :from, (params[:from].presence)
+  = label_tag 'To:'
+  = date_field_tag :to, (params[:to].presence)
+  = submit_tag 'Check Events'
+%table.table
   %thead
     %tr
       %th Title
@@ -18,7 +23,8 @@
         %td= event.description
         %td= event.all_day
         %td= link_to 'Show', event
-        %td= link_to 'Edit', edit_event_path(event)
-        %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
+        - if event_owner?(event)
+          %td= link_to 'Edit', edit_event_path(event)
+          %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
 = link_to 'New Event', new_event_path

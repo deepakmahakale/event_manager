@@ -1,4 +1,3 @@
-%p#notice= notice
 %p
   %strong Title:
   = @event.title
@@ -14,8 +13,8 @@
 %p
   %strong All day:
   = @event.all_day
-%h1 Users
-%table
+%h1 Members
+%table.table
   %thead
     %tr
       %th Username
@@ -25,11 +24,12 @@
   %tbody
     - @event.user_events.each do |user_event|
       %tr
-        %td= user_event.user.username
+        %td= link_to user_event.user.username, user_path(user_event.user)
         %td= user_event.user.email
         %td= user_event.user.phone
         %td= user_event.rsvp_status
 %br/
-= link_to 'Edit', edit_event_path(@event)
-|
+- if event_owner?(@event)
+  = link_to 'Edit', edit_event_path(@event)
+  |
 = link_to 'Back', events_path

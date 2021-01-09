@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   has_many :user_events
   has_many :users, through: :user_events
-  enum status: { upcoming: 0, ongoing: 1, completed: 2 }
+  belongs_to :owner, class_name: 'User', foreign_key: :owner_id
 
   accepts_nested_attributes_for :user_events
 
@@ -11,6 +11,16 @@ class Event < ApplicationRecord
   validates_presence_of :end_time, unless: -> { all_day? }
 
   validate :correct_event_time
+
+  enum status: { upcoming: 0, ongoing: 1, completed: 2 }
+
+  scope :overlapping, ->(from, to) { where('start_time < ? AND ? < end_time', to, from) }
+
+  self.per_page = 10
+
+  def overlap?(from, to)
+    start_time < to && from < end_time
+  end
 
   private
 

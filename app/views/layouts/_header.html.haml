@@ -1,0 +1,20 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container
+    %a.navbar-brand{href: root_url } Event Manager
+    %button.navbar-toggler{"aria-controls": "navbarNav", "aria-expanded": "false", "aria-label": "Toggle navigation", "data-target": "#navbarNav", "data-toggle": "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      %ul.navbar-nav
+        %li.nav-item.active
+          %a.nav-link{href: my_events_path }
+            My Events
+            %span.sr-only (current)
+        %li.nav-item
+          %a.nav-link{href: events_path } All Events
+        %li.nav-item
+          %a.nav-link{href: users_path } Users
+
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li.nav-item
+            = link_to 'Log out', destroy_user_session_path, class: 'nav-link', method: :delete

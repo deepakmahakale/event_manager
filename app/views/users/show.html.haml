@@ -1,4 +1,9 @@
-%p#notice= notice
+= form_tag user_path(@user), method: :get do
+  = label_tag 'From:'
+  = date_field_tag :from, (params[:from].presence || Date.current)
+  = label_tag 'To:'
+  = date_field_tag :to, (params[:to].presence || Date.current + 1.week)
+  = submit_tag 'Check Availability'
 %p
   %strong Username:
   = @user.username
@@ -8,6 +13,12 @@
 %p
   %strong Phone:
   = @user.phone
+%p
+  %strong Availability:
+  %ul
+    - @availability.each do |interval|
+      %li= interval
+
 = link_to 'Edit', edit_user_path(@user)
 |
 = link_to 'Back', users_path

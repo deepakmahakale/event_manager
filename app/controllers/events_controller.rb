@@ -5,6 +5,12 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.order(start_time: :desc)
+    if params[:from].present? && params[:to].present?
+      @events = @events.where(
+        'end_time > ? AND start_time < ?', params[:from], params[:to].to_date.end_of_day
+      )
+    end
+    @events.paginate(page: params[:page])
   end
 
   # GET /events/1

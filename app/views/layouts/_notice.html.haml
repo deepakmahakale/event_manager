@@ -1,0 +1,7 @@
+- mapping = { 'notice' => 'success', 'error' => 'danger' }
+
+- flash.each do |key, value|
+  .alert{class: "alert-#{mapping[key]}", role: 'alert'}
+    .container= value
+    -# %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+      %span{"aria-hidden" => "true"} &times;

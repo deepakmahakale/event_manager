@@ -1,6 +1,5 @@
-%p#notice= notice
-%h1 Users
-%table
+%h1.text-center Users
+%table.table
   %thead
     %tr
       %th Username
@@ -16,5 +15,7 @@
         %td= link_to 'Show', user
         %td= link_to 'Edit', edit_user_path(user)
         %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+.text-center
+  = will_paginate @users
 %br/
 = link_to 'New User', new_user_path

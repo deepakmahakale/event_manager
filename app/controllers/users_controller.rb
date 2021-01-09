@@ -4,12 +4,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.paginate(page: params[:page])
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @availability = @user.availability(from: params[:from], to: params[:to])
   end
 
   # GET /users/new

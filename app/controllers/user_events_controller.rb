@@ -16,7 +16,7 @@ class UserEventsController < ApplicationController
   end
 
   def my_events
-    @user_events = current_user.user_events.joins(:event).order(start_time: :desc)
+    @user_events = current_user.user_events.includes(:event).order(start_time: :desc).paginate(page: params[:page])
   end
 
   private
