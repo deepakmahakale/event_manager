@@ -4,8 +4,17 @@
 
 ```
 bundle install
+rake db:create
 rake db:migrate
 rails s
+```
+
+```
+# Create a new user or change password of any existing user from console
+
+user = User.last
+user.password = 'password'
+user.save
 ```
 
 ### Tasks
@@ -23,7 +32,9 @@ Note: Please import the users first
 
 ### Questions/Assumptions
 **CSV processing**
-
+Model
+  - Only owner of the event can edit the event and add/remove users
+  - User can respond to event RSVP from my_events tab
 Events CSV:
   - Task will not create users if they don't exist
   - only existing users will be associated with the event
