@@ -1,0 +1,26 @@
+%p#notice= notice
+%h1 Events
+%table
+  %thead
+    %tr
+      %th Title
+      %th Start time
+      %th End time
+      %th Description
+      %th All day
+      %th{:colspan => "3"}
+  %tbody
+    - @user_events.each do |user_event|
+      - event = user_event.event
+      %tr
+        %td= link_to event.title, event
+        %td= event.start_time
+        %td= event.end_time
+        %td= event.description
+        %td= event.all_day
+        %td= button_to "Yes", user_event_path(user_event, user_event: { rsvp_status: :rsvp_yes } ), method: :patch, disabled: (true if user_event.rsvp_yes?)
+        %td= button_to "No", user_event_path(user_event, user_event: { rsvp_status: :rsvp_no } ), method: :patch, disabled: (true if user_event.rsvp_no?)
+        %td= button_to "Maybe", user_event_path(user_event, user_event: { rsvp_status: :rsvp_maybe } ), method: :patch, disabled: (true if user_event.rsvp_maybe?)
+%br/
+= link_to 'New Event', new_event_path
+`

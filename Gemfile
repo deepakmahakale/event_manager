@@ -7,7 +7,9 @@ gem 'rails', '~> 6.0.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
+gem 'haml-rails'
 gem 'jbuilder', '~> 2.7'
+gem 'jquery-rails'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5'
 gem 'sqlite3', '~> 1.4'

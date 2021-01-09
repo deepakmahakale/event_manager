@@ -1,0 +1,35 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @event.title
+%p
+  %strong Start time:
+  = @event.start_time
+%p
+  %strong End time:
+  = @event.end_time
+%p
+  %strong Description:
+  = @event.description
+%p
+  %strong All day:
+  = @event.all_day
+%h1 Users
+%table
+  %thead
+    %tr
+      %th Username
+      %th Email
+      %th Phone
+      %th RSVP
+  %tbody
+    - @event.user_events.each do |user_event|
+      %tr
+        %td= user_event.user.username
+        %td= user_event.user.email
+        %td= user_event.user.phone
+        %td= user_event.rsvp_status
+%br/
+= link_to 'Edit', edit_event_path(@event)
+|
+= link_to 'Back', events_path
