@@ -1,24 +1,34 @@
-# README
+# Event Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Setup
 
-Things you may want to cover:
+```
+bundle install
+rake db:migrate
+rails s
+```
 
-* Ruby version
+### Tasks
+Add the CSV's in public folder of the application and execute the following tasks.
 
-* System dependencies
+Note: Please import the users first
 
-* Configuration
+1. `rake import:users`
+2. `rake import:events`
 
-* Database creation
+### Scope of improvement
+- ActiveRecord Bulk upload can be used in CSV import to avoid multiple insert queries
+- Calendar can be added
+- users multiselect can be replaced with tags select where we won't load all users
 
-* Database initialization
+### Questions/Assumptions
+**CSV processing**
 
-* How to run the test suite
+Events CSV:
+  - Task will not create users if they don't exist
+  - only existing users will be associated with the event
+  - Even if we import the users we don't have emails so there is no way to connect to users or send them email for password reset
 
-* Services (job queues, cache servers, search engines, etc.)
+-
 
-* Deployment instructions
 
-* ...

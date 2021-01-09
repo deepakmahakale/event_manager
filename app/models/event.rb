@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   has_many :user_events
   has_many :users, through: :user_events
-  belongs_to :owner, class_name: 'User', foreign_key: :owner_id
+  belongs_to :owner, class_name: 'User', foreign_key: :owner_id, optional: true
 
   accepts_nested_attributes_for :user_events
 
@@ -32,7 +32,7 @@ class Event < ApplicationRecord
     if start_time.present? && end_time.present? && start_time < end_time
       true
     else
-      errors.add(:start_time, 'start_time should be less than end_time')
+      errors.add(:start_time, 'should be less than end_time')
     end
   end
 end

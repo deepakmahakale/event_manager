@@ -29,24 +29,29 @@ namespace :import do
     # Use activerecord-bulk upload
     #
     CSV.foreach('public/users.csv',
-                headers: true, header_converters: :symbol) do |row|
+                headers: true, header_converters: :symbol).with_index do |row, index|
 
-      User.create(row.to_h.slice(:username, :email, :phone))
+      user = User.create(row.to_h.slice(:username, :email, :phone).merge(password: SecureRandom.hex[0..14]))
+      puts user.errors.full_messages.join('. ') if user.errors.any?
+      puts "Processed #{index}+" if (index % 10).zero? && !index.zero?
     end
   end
 
   task events: :environment do
     CSV.foreach('public/events.csv',
-                headers: true, header_converters: :symbol) do |row|
+                headers: true, header_converters: :symbol).with_index do |row, index|
 
       event = Event.create(
         title: row[:title],
         start_time: row[:starttime],
         end_time: row[:endtime],
         description: row[:description],
-        all_day: row[:allday]
+        all_day: row[:allday] == 'true'
       )
+
+      puts event.errors.full_messages.join('. ') if event.errors.any?
       add_users_to_event(event, row[:usersrsvp])
+      puts "Processed #{index}+" if (index % 10).zero? && !index.zero?
     end
   end
 end
