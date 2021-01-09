@@ -20,6 +20,8 @@
         %td= button_to "Yes", user_event_path(user_event, user_event: { rsvp_status: :rsvp_yes } ), method: :patch, disabled: (true if user_event.rsvp_yes?)
         %td= button_to "No", user_event_path(user_event, user_event: { rsvp_status: :rsvp_no } ), method: :patch, disabled: (true if user_event.rsvp_no?)
         %td= button_to "Maybe", user_event_path(user_event, user_event: { rsvp_status: :rsvp_maybe } ), method: :patch, disabled: (true if user_event.rsvp_maybe?)
+= will_paginate @user_events
+
 %br/
 = link_to 'New Event', new_event_path
 `

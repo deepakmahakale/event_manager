@@ -10,7 +10,7 @@ class EventsController < ApplicationController
         'end_time > ? AND start_time < ?', params[:from], params[:to].to_date.end_of_day
       )
     end
-    @events.paginate(page: params[:page])
+    @events = @events.paginate(page: params[:page])
   end
 
   # GET /events/1
